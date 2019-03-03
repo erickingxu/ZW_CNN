@@ -1,2 +1,2 @@
-# ¹¤³Ì½éÉÜ
-$\quad$ ´ó¼ÒºÃ£¬ÕâÊÇÎÒÓÃC++¿ª·¢µÄÒ»¸öÓÃOpenCVÖÐµÄMat×÷Îª»ù´¡Êý¾Ý½á¹¹µÄµÄÉñ¾­ÍøÂç£¬Ö÷ÒªÎªÁË¶ÍÁ¶×Ô¼ºµÄC++¹¤³ÌÄÜÁ¦ºÍ¶ÔÉñ¾­ÍøÂçµÄÀí½â£¬²¢ÔÚ¼¼Êõ²©¿Í(https://blog.csdn.net/just_sort/article/details/88095812)ÖÐÏêÏ¸¼ÇÂ¼ÁËÕâ¸ö¹¤³ÌµÄ¿ª·¢Àú³Ì£¬»¶Ó­´ó¼Òstar»òÕßÓëÎÒ¹²Í¬ÌÖÂÛÉñ¾­ÍøÂçµÄÏà¹ØÎÊÌâ¡£
+# å·¥ç¨‹ä»‹ç»
+å¤§å®¶å¥½ï¼Œè¿™æ˜¯æˆ‘ç”¨C++å¼€å‘çš„ä¸€ä¸ªç”¨OpenCVä¸­çš„Matä½œä¸ºåŸºç¡€æ•°æ®ç»“æž„çš„çš„ç¥žç»ç½‘ç»œï¼Œä¸»è¦ä¸ºäº†é”»ç‚¼è‡ªå·±çš„C++å·¥ç¨‹èƒ½åŠ›å’Œå¯¹ç¥žç»ç½‘ç»œçš„ç†è§£ï¼Œå¹¶åœ¨æŠ€æœ¯åšå®¢(https://blog.csdn.net/just_sort/article/details/88095812) ä¸­è¯¦ç»†è®°å½•äº†è¿™ä¸ªå·¥ç¨‹çš„å¼€å‘åŽ†ç¨‹ï¼Œæ¬¢è¿Žå¤§å®¶staræˆ–è€…ä¸Žæˆ‘å…±åŒè®¨è®ºç¥žç»ç½‘ç»œçš„ç›¸å…³é—®é¢˜ã€‚
