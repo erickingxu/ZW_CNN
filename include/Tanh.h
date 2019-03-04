@@ -4,10 +4,10 @@
 using namespace std;
 using namespace cv;
 
-class Sigmoid {
+class Tanh {
 public:
-	Sigmoid();
-	~Sigmoid();
+	Tanh();
+	~Tanh();
 	Mat Activation(Mat input);
 	Mat DeActivation(Mat input);
 };

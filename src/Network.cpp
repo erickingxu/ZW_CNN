@@ -1,23 +1,20 @@
-#include "../include/Network.h"
+#include "Network.h"
 
 void Net::initNet(vector <int> layer_neuron_num_) {
-	//èµ‹å€¼
+	//¸³Öµ
 	layer_neuron_num = layer_neuron_num_;
-	//æ„é€ layerï¼Œç”±äºéšè—å±‚åªéœ€è¦ç¥ç»å…ƒä¸ªæ•°ï¼Œç¬¬äºŒç»´é»˜è®¤ä¸º1ï¼Œå¹¶é€‰æ‹©åˆå§‹åŒ–æ–¹å¼
+	//¹¹Ôìlayer£¬ÓÉÓÚÒş²Ø²ãÖ»ĞèÒªÉñ¾­Ôª¸öÊı£¬µÚ¶şÎ¬Ä¬ÈÏÎª1£¬²¢Ñ¡Ôñ³õÊ¼»¯·½Ê½
 	int Size = layer_neuron_num.size();
-	layer.resize(Size);
 	for (int i = 0; i < Size; i++) {
 		Mat temp(layer_neuron_num[i], 1, CV_32FC1);
-		layer.emplace_back(temp);
+		layer.push_back(temp);
 	}
-	//æ„é€ weightså’Œbiases
-	weights.resize(Size - 1);
-	biases.resize(Size - 1);
+	//¹¹ÔìweightsºÍbiases
 	for (int i = 0; i < Size; i++) {
 		Mat temp_weight(layer[i + 1].rows, layer[i].rows, CV_32FC1);
 		Mat temp_biases(layer[i + 1].rows, layer[i].rows, CV_32FC1);
-		weights.emplace_back(temp_weight);
-		biases.emplace_back(temp_biases);
+		weights.push_back(temp_weight);
+		biases.push_back(temp_biases);
 	}
 	cout << "============= Initialize zxy_neural_network Net Done! ====================" << endl;
 }
@@ -87,3 +84,6 @@ void Net::initBiases() {
 	cout << "============= Initialize zxy_neural_network Biases Done! ====================" << endl;
 }
 
+void Net::SetThreads(int num) {
+	num_threads = num;
+}

@@ -21,8 +21,12 @@ public:
 	//0表示[-1，1]随机初始化
 	//1表示均值为GaussMean方差为GaussSigma的高斯初始化
 	int InitType = 0;
+	//高斯初始化的方差默认为1.0
 	float GaussSigma = 1.0;
+	//高斯初始化的均值默认为0
 	float GaussMean = 0;
+	//openmp线程数, 默认为1
+	int num_threads = 1;
 public:
 	Net() {};
 	~Net() {};
@@ -31,5 +35,5 @@ public:
 	float *random_gaussian(int length);
 	void initWeights();
 	void initBiases();
-
+	void SetThreads(int num);
 };
