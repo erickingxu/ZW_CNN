@@ -86,3 +86,4 @@ void Net::initBiases() {
 	}
 	cout << "============= Initialize zxy_neural_network Biases Done! ====================" << endl;
 }
+
