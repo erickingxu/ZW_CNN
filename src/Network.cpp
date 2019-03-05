@@ -2,6 +2,7 @@
 #include "Sigmoid.h"
 #include "Tanh.h"
 #include "Relu.h"
+#include "Loss.h"
 
 void Net::initNet(vector <int> layer_neuron_num_) {
 	//¸³Öµ
@@ -109,10 +110,15 @@ void Net::forward() {
 		else if (activation_func == "relu") {
 			Relu relu;
 			layer[i + 1] = relu.Activation(output);
-		}else if(activation_func == "tanh"){
+		}
+		else if (activation_func == "tanh") {
 			Tanh tanh;
 			layer[i + 1] = tanh.Activation(output);
 		}
 	}
-	
+	Loss now;
+	loss = now.L1(layer[Size - 1], label, output_error);
 }
+
+
+

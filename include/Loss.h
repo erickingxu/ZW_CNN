@@ -9,6 +9,6 @@ class Loss {
 public:
 	Loss() {};
 	~Loss() {};
-	float L1(Mat input, Mat label);
-	float L2(Mat input, Mat label);
+	float L1(Mat input, Mat label, Mat &out_error);
+	float L2(Mat input, Mat label, Mat &out_error);
 };

@@ -33,6 +33,10 @@ public:
 	string loss_type = "L1";
 	//定义损失函数的值
 	float loss;
+	//定义标签Mat
+	Mat label;
+	//前向传播的输出
+	Mat output_error;
 public:
 	Net() {};
 	~Net() {};
