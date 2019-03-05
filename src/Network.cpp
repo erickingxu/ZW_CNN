@@ -1,4 +1,7 @@
 #include "Network.h"
+#include "Sigmoid.h"
+#include "Tanh.h"
+#include "Relu.h"
 
 void Net::initNet(vector <int> layer_neuron_num_) {
 	//赋值
@@ -85,5 +88,31 @@ void Net::initBiases() {
 }
 
 void Net::SetThreads(int num) {
-	num_threads = num;
+	openmp_num_threads = num;
+}
+
+void Net::SetActivation(string input) {
+	activation_func = input;
+}
+
+void Net::forward() {
+	int Size = layer_neuron_num.size();
+
+	//线性模型Y = f(XW + b)
+	for (int i = 0; i < Size - 1; i++) {
+		Mat output = weights[i] * layer[i] + biases[i];
+		//非线性函数
+		if (activation_func == "sigmoid") {
+			Sigmoid sigmoid;
+			layer[i + 1] = sigmoid.Activation(output);
+		}
+		else if (activation_func == "relu") {
+			Relu relu;
+			layer[i + 1] = relu.Activation(output);
+		}else if(activation_func == "tanh"){
+			Tanh tanh;
+			layer[i + 1] = tanh.Activation(output);
+		}
+	}
+	
 }

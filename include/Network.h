@@ -26,14 +26,31 @@ public:
 	//高斯初始化的均值默认为0
 	float GaussMean = 0;
 	//openmp线程数, 默认为1
-	int num_threads = 1;
+	int openmp_num_threads = 1;
+	//激活函数类型
+	string activation_func = "sigmoid";
+	//损失函数类型
+	string loss_type = "L1";
+	//定义损失函数的值
+	float loss;
 public:
 	Net() {};
 	~Net() {};
+	//初始化网络
 	void initNet(vector <int> layer_neuron_num_);
+	//产生普通的随机数
 	float *random_uniform(int length);
+	//产生高斯分布随机数
 	float *random_gaussian(int length);
+	//初始化权重
 	void initWeights();
+	//初始化偏置
 	void initBiases();
+	//设置网络运行的线程数
 	void SetThreads(int num);
+	//初始化每层Layer激活函数类型
+	void SetActivation(string input);
+	//前向传播
+	void forward();
+
 };

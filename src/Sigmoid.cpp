@@ -28,7 +28,7 @@ Mat Sigmoid::Activation(Mat input) {
 			dest.at<float>(i, j) = 1.0 / (1.0 + exp_x.at<float>(i, j));
 		}
 	}
-	
+
 	return dest;
 }
 
@@ -52,6 +52,6 @@ Mat Sigmoid::DeActivation(Mat input) {
 			dest.at<float>(i, j) = psigmoidx.at<float>(i, j) * nsigmoidx.at<float>(i, j);
 		}
 	}
-	
+
 	return dest;
 }
