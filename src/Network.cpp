@@ -120,5 +120,52 @@ void Net::forward() {
 	loss = now.L1(layer[Size - 1], label, output_error);
 }
 
+// 梯度矩阵的shape和网络层mat的shape完全一样
+void Net::getGrad() {
+	int Size = layer.size() - 1;
+	delta.resize(Size);
+	for (int i = Size; i >= 0; i--) {
+		delta[i].create(layer[i + 1].size(), CV_32FC1);
+		Mat dx;
+		if (activation_func == "sigmoid") {
+			Sigmoid sigmoid;
+			dx = sigmoid.DeActivation(layer[i + 1]);
+		}
+		else if (activation_func == "relu") {
+			Relu relu;
+			dx = relu.DeActivation(layer[i + 1]);
+		}
+		else if (activation_func == "tanh") {
+			Tanh tanh;
+			dx = tanh.DeActivation(layer[i + 1]);
+		}
+		if (i == Size) {
+			delta[i] = dx.mul(output_error);
+		}
+		else {
+			//链式法则
+			delta[i] = dx.mul(weights[i + 1].t() * delta[i + 1]);
+		}
+	}
+}
+
+void Net::UpdateParameters() {
+	int Size = weights.size();
+	for (int i = 0; i < Size; i++) {
+		Mat delta_weights = learning_rate * (delta[i] * layer[i].t());
+		Mat delta_biases = learning_rate * delta[i];
+		weights[i] = weights[i] + delta_weights;
+		biases[i] = biases[i] + delta_biases;
+	}
+}
+
+void Net::backward() {
+	getGrad();
+	UpdateParameters();
+}
+
+
+
+
 
 

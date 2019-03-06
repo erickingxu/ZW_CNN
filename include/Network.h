@@ -35,8 +35,16 @@ public:
 	float loss;
 	//定义标签Mat
 	Mat label;
-	//前向传播的输出
+	//前向传播的最后一层的输出，反向传播的起点
 	Mat output_error;
+	//损失函数对所有参数的梯度
+	vector <Mat> delta;
+	//根据去求取的梯度和学习率参数更新
+	void UpdateParameters();
+	//反向传播函数
+	void backward();
+	//学习率
+	float learning_rate;
 public:
 	Net() {};
 	~Net() {};
@@ -56,5 +64,6 @@ public:
 	void SetActivation(string input);
 	//前向传播
 	void forward();
-
+	//反向传播求梯度（链式法则）
+	void getGrad();
 };
