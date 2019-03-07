@@ -44,7 +44,13 @@ public:
 	//反向传播函数
 	void backward();
 	//学习率
-	float learning_rate;
+	float learning_rate = 0.001;
+	//训练的迭代次数
+	int train_iter = 0;
+	//测试迭代的次数
+	int test_iter = 0;
+	//batch的大小
+	int batch_size = 1;
 public:
 	Net() {};
 	~Net() {};
@@ -66,4 +72,7 @@ public:
 	void forward();
 	//反向传播求梯度（链式法则）
 	void getGrad();
+	//实现Tarin
+	void Train(Mat input, Mat label_);
+	//
 };

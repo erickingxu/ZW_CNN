@@ -164,6 +164,57 @@ void Net::backward() {
 	UpdateParameters();
 }
 
+void Net::Train(Mat input, Mat label_) {
+	if (input.rows == 0 || input.cols == 0) {
+		fprintf(stderr, "Input Is Empty!");
+		return;
+	}
+	if (input.rows != layer[0].rows) {
+		fprintf(stderr, "Rows of input don't Match the number of input!");
+		return;
+	}
+	cout << "*********Train zxy_neural_network Begin!***********" << endl;
+	cout << "******************Batch Size: 1********************" << endl;
+	int row = input.rows;
+	int col = input.cols;
+	//单个样本即是batch为1
+	if (row == (layer[0].rows) && col == 1) {
+		label = label_;
+		layer[0] = input;
+		for (int i = 1; i <= train_iter; i++) {
+			forward();
+			backward();
+			if (i % 10 == 0 || i == train_iter) {
+				cout << "Train " << i << " times" << endl;
+				cout << "Loss: " << loss << endl;
+			}
+		}
+		cout << endl << "Train " << train_iter << " times" << endl;
+		cout << "Finally Loss: " << loss << endl;
+		cout << "Train sucessfully!" << endl;
+	}
+	else {
+		float batch_loss = 0;
+		for (int i = 1; i <= train_iter; i++) {
+			for (int j = 0; j < batch_size; j++) {
+				label = label_.col(j);
+				layer[0] = input.col(j);
+				forward();
+				backward();
+				batch_loss += loss;
+			}
+			batch_loss /= batch_size;
+			if (i % 10 == 0 || i == train_iter) {
+				cout << "Train " << i << " times" << endl;
+				cout << "Loss: " << loss << endl;
+			}
+		}
+		cout << endl << "Train " << train_iter << " times" << endl;
+		cout << "Finally Loss: " << loss << endl;
+		cout << "Train sucessfully!" << endl;
+	}
+}
+
 
 
 
