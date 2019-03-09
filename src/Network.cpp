@@ -174,11 +174,10 @@ void Net::Train(Mat input, Mat label_) {
 		return;
 	}
 	cout << "*********Train zxy_neural_network Begin!***********" << endl;
-	cout << "******************Batch Size: 1********************" << endl;
 	int row = input.rows;
 	int col = input.cols;
 	//单个样本即是batch为1
-	if (row == (layer[0].rows) && col == 1) {
+	if (col == 1) {
 		label = label_;
 		layer[0] = input;
 		for (int i = 1; i <= train_iter; i++) {
@@ -214,6 +213,110 @@ void Net::Train(Mat input, Mat label_) {
 		cout << "Train sucessfully!" << endl;
 	}
 }
+
+void Net::Test(Mat input, Mat label) {
+	if (input.rows == 0 || input.cols == 0) {
+		fprintf(stderr, "Input Is Empty!");
+		return;
+	}
+	cout << "*********Test zxy_neural_network Begin!***********" << endl;
+	if (input.rows != layer[0].rows) {
+		fprintf(stderr, "Rows of input don't Match the number of input!");
+		return;
+	}
+	int row = input.rows;
+	int col = input.cols;
+	//对一张图片进行预测
+	if (col == 1) {
+		int predict_index = Predict1(input);
+		int label_index = 0;
+		int mx_score = 0;
+		for (int i = 1; i < row; i++) {
+			if (label.at<float>(i, 0) > mx_score) {
+				mx_score = label.at<float>(i, 0);
+				label_index = i;
+			}
+		}
+		cout << "Predict index: " << predict_index << endl;
+		cout << "Label index: " << label_index << endl;
+		cout << "Loss: " << loss << endl;
+	}
+	else {
+		float sum_loss = 0;
+		int num = 0;
+		for (int i = 0; i < col; i++) {
+			layer[0] = input.col(i);
+			int predict_index = Predict1(layer[0]);
+			sum_loss += loss;
+			int label_index = 0;
+			int mx_score = 0;
+			for (int k = 1; k < row; k++) {
+				if (label.at<float>(k, 0) > mx_score) {
+					mx_score = label.at<float>(k, 0);
+					label_index = k;
+				}
+			}
+			cout << "Test sample: " << i << "   " << "Predict: " << predict_index << endl;
+			cout << "Test sample: " << i << "   " << "Label:  " << label_index << endl << endl;
+			num += (predict_index == label_index);
+		}
+		accuracy = (float)num / col;
+		float average_loss = sum_loss / col;
+		std::cout << "Loss average: " << average_loss << std::endl;
+		std::cout << "accuracy: " << accuracy << std::endl;
+	}
+}
+
+int Net::Predict1(Mat input) {
+	int row = input.rows;
+	int col = input.cols;
+	if (row == 0 || col == 0) {
+		fprintf(stderr, "Input Is Empty!");
+		return;
+	}
+	layer[0] = input;
+	forward();
+	int Size = layer.size() - 1;
+	Mat output = layer[Size];
+	int mxscore = output.at<float>(0, 0);
+	int index = 0;
+	for (int i = 1; i < row; i++) {
+		if (output.at<float>(i, 0) > mxscore) {
+			mxscore = output.at<float>(i, 0);
+			index = i;
+		}
+	}
+	return index;
+}
+
+void Net::save_model(string file_name) {
+	FileStorage model(file_name, FileStorage::WRITE);
+	model << "layer_neuron_num" << layer_neuron_num;
+	model << "learning_rate" << learning_rate;
+	model << "activation_func" << activation_func;
+	for (int i = 0; i < weights.size(); i++) {
+		string weight = "weight_" + to_string(i);
+		model << weight << weights[i];
+	}
+	model.release();
+}
+
+void Net::load_model(string file_name) {
+	FileStorage fs;
+	fs.open(file_name, FileStorage::READ);
+	fs["layer_neuron_num"] >> layer_neuron_num;
+	initNet(layer_neuron_num);
+	for (int i = 0; i < weights.size(); i++) {
+		string weight = "weight_" + to_string(i);
+		fs[weight] >> weights[i];
+	}
+	fs["learning_rate"] >> learning_rate;
+	fs["activation_func"] >> activation_func;
+	fs.release();
+}
+
+
+
 
 
 

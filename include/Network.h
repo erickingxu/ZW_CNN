@@ -51,6 +51,8 @@ public:
 	int test_iter = 0;
 	//batch的大小
 	int batch_size = 1;
+	//accuracy
+	float accuracy = 0.0;
 public:
 	Net() {};
 	~Net() {};
@@ -74,5 +76,12 @@ public:
 	void getGrad();
 	//实现Tarin
 	void Train(Mat input, Mat label_);
-	//
+	//实现Test
+	void Test(Mat input, Mat label_);
+	//实现batch为1的predict和argmax
+	int Predict1(Mat input);
+	//保存训练的模型
+	void save_model(string file_name);
+	//加载模型
+	void load_model(string file_name);
 };
