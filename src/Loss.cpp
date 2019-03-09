@@ -1,5 +1,5 @@
 #include "Loss.h"
-#include "Network.h"
+#include "config.h"
 
 float Loss::L1(Mat input, Mat label, Mat &out_error) {
 	if (input.rows != label.rows || input.cols != label.cols) {
@@ -17,8 +17,8 @@ float Loss::L1(Mat input, Mat label, Mat &out_error) {
 	}
 
 	out_error = error.clone();
-#pragma omp parallel for num_threads(openmp_num_threads)
 	float sum = 0;
+#pragma omp parallel for num_threads(openmp_num_threads)
 	for (int i = 0; i < row; i++) {
 		for (int j = 0; j < col; j++) {
 #pragma omp critical
@@ -48,8 +48,8 @@ float Loss::L2(Mat input, Mat label, Mat &out_error) {
 	}
 
 	out_error = error.clone();
-#pragma omp parallel for num_threads(openmp_num_threads)
 	float sum = 0;
+#pragma omp parallel for num_threads(openmp_num_threads)
 	for (int i = 0; i < row; i++) {
 		for (int j = 0; j < col; j++) {
 #pragma omp critical

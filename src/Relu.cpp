@@ -1,5 +1,5 @@
 #include "Relu.h"
-#include "Network.h"
+#include "config.h"
 
 Mat Relu::Activation(Mat input) {
 	int row = input.rows;

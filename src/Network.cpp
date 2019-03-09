@@ -88,10 +88,6 @@ void Net::initBiases() {
 	cout << "============= Initialize zxy_neural_network Biases Done! ====================" << endl;
 }
 
-void Net::SetThreads(int num) {
-	openmp_num_threads = num;
-}
-
 void Net::SetActivation(string input) {
 	activation_func = input;
 }
@@ -272,7 +268,7 @@ int Net::Predict1(Mat input) {
 	int col = input.cols;
 	if (row == 0 || col == 0) {
 		fprintf(stderr, "Input Is Empty!");
-		return;
+		exit(-1);
 	}
 	layer[0] = input;
 	forward();

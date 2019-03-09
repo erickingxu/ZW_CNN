@@ -26,7 +26,6 @@ public:
 	//高斯初始化的均值默认为0
 	float GaussMean = 0;
 	//openmp线程数, 默认为1
-	int openmp_num_threads = 1;
 	//激活函数类型
 	string activation_func = "sigmoid";
 	//损失函数类型
@@ -66,8 +65,6 @@ public:
 	void initWeights();
 	//初始化偏置
 	void initBiases();
-	//设置网络运行的线程数
-	void SetThreads(int num);
 	//初始化每层Layer激活函数类型
 	void SetActivation(string input);
 	//前向传播

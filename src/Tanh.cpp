@@ -1,14 +1,14 @@
 #include "Tanh.h"
-#include "Network.h"
+#include "config.h"
 
 //e^x
-inline float exp2(float x) {
-	x = 1.0 + x / 1024;
-	x *= x; x *= x; x *= x; x *= x;
-	x *= x; x *= x; x *= x; x *= x;
-	x *= x; x *= x;
-	return x;
-}
+//inline float exp2(float x) {
+//	x = 1.0 + x / 1024;
+//	x *= x; x *= x; x *= x; x *= x;
+//	x *= x; x *= x; x *= x; x *= x;
+//	x *= x; x *= x;
+//	return x;
+//}
 
 Mat Tanh::Activation(Mat input) {
 	int row = input.rows;
@@ -19,14 +19,14 @@ Mat Tanh::Activation(Mat input) {
 #pragma omp parallel for num_threads(openmp_num_threads)
 	for (int i = 0; i < row; i++) {
 		for (int j = 0; j < col; j++) {
-			pos_exp_x.at<float>(i, j) = exp2(input.at<float>(i, j));
+			pos_exp_x.at<float>(i, j) = exp(input.at<float>(i, j));
 		}
 	}
 
 #pragma omp parallel for num_threads(openmp_num_threads)
 	for (int i = 0; i < row; i++) {
 		for (int j = 0; j < col; j++) {
-			neg_exp_x.at<float>(i, j) = exp2(-input.at<float>(i, j));
+			neg_exp_x.at<float>(i, j) = exp(-input.at<float>(i, j));
 		}
 	}
 
