@@ -46,7 +46,7 @@ int main() {
 	filename = "input_1000.xml";
 	FileStorage fs2(filename, FileStorage::WRITE);
 	fs2 << "input" << input_1000;
-	fs2 << "label" << label2; // Write cv::Mat
+	fs2 << "label" << label_1000; // Write cv::Mat
 	fs2.release();
 	system("pause");
 	return 0;
