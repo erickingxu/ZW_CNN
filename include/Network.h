@@ -31,7 +31,7 @@ public:
 	//损失函数类型
 	string loss_type = "L1";
 	//定义损失函数的值
-	float loss;
+	float loss = 0;
 	//定义标签Mat
 	Mat label;
 	//前向传播的最后一层的输出，反向传播的起点
@@ -81,4 +81,6 @@ public:
 	void save_model(string file_name);
 	//加载模型
 	void load_model(string file_name);
+	//加载数据
+	void loadData(string filename, Mat &INPUT, Mat &LABEL, int st, int sample_num);
 };

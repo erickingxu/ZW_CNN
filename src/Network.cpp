@@ -9,14 +9,17 @@ void Net::initNet(vector <int> layer_neuron_num_) {
 	layer_neuron_num = layer_neuron_num_;
 	//构造layer，由于隐藏层只需要神经元个数，第二维默认为1，并选择初始化方式
 	int Size = layer_neuron_num.size();
+	layer.clear();
 	for (int i = 0; i < Size; i++) {
 		Mat temp(layer_neuron_num[i], 1, CV_32FC1);
 		layer.push_back(temp);
 	}
 	//构造weights和biases
-	for (int i = 0; i < Size; i++) {
+	weights.clear();
+	biases.clear();
+	for (int i = 0; i < Size - 1; i++) {
 		Mat temp_weight(layer[i + 1].rows, layer[i].rows, CV_32FC1);
-		Mat temp_biases(layer[i + 1].rows, layer[i].rows, CV_32FC1);
+		Mat temp_biases(layer[i + 1].rows, 1, CV_32FC1);
 		weights.push_back(temp_weight);
 		biases.push_back(temp_biases);
 	}
@@ -97,6 +100,10 @@ void Net::forward() {
 
 	//线性模型Y = f(XW + b)
 	for (int i = 0; i < Size - 1; i++) {
+		//printf("%d %d\n", weights[i].rows, weights[i].cols);
+		//printf("%d %d\n", layer[i].rows, layer[i].cols);
+		//printf("%d %d\n", biases[i].rows, biases[i].cols);
+
 		Mat output = weights[i] * layer[i] + biases[i];
 		//非线性函数
 		if (activation_func == "sigmoid") {
@@ -120,7 +127,7 @@ void Net::forward() {
 void Net::getGrad() {
 	int Size = layer.size() - 1;
 	delta.resize(Size);
-	for (int i = Size; i >= 0; i--) {
+	for (int i = Size - 1; i >= 0; i--) {
 		delta[i].create(layer[i + 1].size(), CV_32FC1);
 		Mat dx;
 		if (activation_func == "sigmoid") {
@@ -135,7 +142,7 @@ void Net::getGrad() {
 			Tanh tanh;
 			dx = tanh.DeActivation(layer[i + 1]);
 		}
-		if (i == Size) {
+		if (i == Size-1) {
 			delta[i] = dx.mul(output_error);
 		}
 		else {
@@ -210,7 +217,7 @@ void Net::Train(Mat input, Mat label_) {
 	}
 }
 
-void Net::Test(Mat input, Mat label) {
+void Net::Test(Mat input, Mat label_) {
 	if (input.rows == 0 || input.cols == 0) {
 		fprintf(stderr, "Input Is Empty!");
 		return;
@@ -222,14 +229,17 @@ void Net::Test(Mat input, Mat label) {
 	}
 	int row = input.rows;
 	int col = input.cols;
+	int label_row = label_.rows;
+	int label_col = label_.cols;
 	//对一张图片进行预测
 	if (col == 1) {
 		int predict_index = Predict1(input);
+
 		int label_index = 0;
-		int mx_score = 0;
-		for (int i = 1; i < row; i++) {
-			if (label.at<float>(i, 0) > mx_score) {
-				mx_score = label.at<float>(i, 0);
+		float mx_score = 0;
+		for (int i = 1; i < label_row; i++) {
+			if (label_.at<float>(i, 0) > mx_score) {
+				mx_score = label_.at<float>(i, 0);
 				label_index = i;
 			}
 		}
@@ -244,11 +254,13 @@ void Net::Test(Mat input, Mat label) {
 			layer[0] = input.col(i);
 			int predict_index = Predict1(layer[0]);
 			sum_loss += loss;
+			Mat label__ = label_.col(i);
 			int label_index = 0;
-			int mx_score = 0;
-			for (int k = 1; k < row; k++) {
-				if (label.at<float>(k, 0) > mx_score) {
-					mx_score = label.at<float>(k, 0);
+			float mx_score = 0;
+			//printf("%d %d %d\n", label_.rows, label_.cols, label_.channels());
+			for (int k = 1; k < label_row; k++) {
+				if (label__.at<float>(k, 0) > mx_score) {
+					mx_score = label__.at<float>(k, 0);
 					label_index = k;
 				}
 			}
@@ -311,7 +323,16 @@ void Net::load_model(string file_name) {
 	fs.release();
 }
 
-
+void Net::loadData(string filename, Mat &INPUT, Mat &LABEL, int st, int sample_num) {
+	FileStorage fs;
+	fs.open(filename, FileStorage::READ);
+	Mat input_, label_;
+	fs["input"] >> input_;
+	fs["label"] >> label_;
+	fs.release();
+	INPUT = input_(Rect(st, 0, sample_num, input_.rows));
+	LABEL = label_(Rect(st, 0, sample_num, label_.rows));
+}
 
 
 
