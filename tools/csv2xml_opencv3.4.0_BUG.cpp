@@ -5,6 +5,7 @@
 using namespace std;
 using namespace cv;
 
+//OpenCV3.4.0 loadDromCSV会少读一列，应该是一个BUG
 int main() {
 	Ptr <ml::TrainData> train_data;
 	train_data = ml::TrainData::loadFromCSV("F:\\train.csv", 1);

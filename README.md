@@ -1,11 +1,12 @@
 # 介绍
 大家好，这是我用C++开发的一个用OpenCV中的Mat作为基础数据结构的的神经网络，主要为了锻炼自己的C++工程能力和对神经网络的理解，并在技术博客(https://blog.csdn.net/just_sort/article/details/88095812) 中详细记录了这个工程的开发历程，欢迎大家star或者与我共同讨论神经网络的相关问题。
 # 依赖
-- OpenCV 2.4.13 可以使用tools下面的csv2xml.cpp或者csv2xml.py做数据转换，且无误。
-- OpenCV 3.4.0  因为OpenCV3存在一个读取csv转Mat的BUG，所以可以使用tools下面的csv2xml.py做数据转换。
+- OpenCV 2.4.13 可以使用tools下面的csv2xml_opencv2.4.13.cpp转换。
+- OpenCV 3.4.0  因为OpenCV3存在一个读取csv转Mat的BUG，会导致读取CSV少一行，可以使用OpenCV2.4.13或者使用Python转换。
 # 目录
 - include 实现神经网络的头文件。
 - src 实现神经网路的源码。
+- data MNist数据集的xml文件，通过tools的工具转换过来。
 - tools 实现了csv文件和xml文件转换工具。
 - examples 训练MNIST手写数据集的例子。
 - benchmark 一些测试结果记录。
