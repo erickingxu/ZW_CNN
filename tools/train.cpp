@@ -1,6 +1,5 @@
 #include "Network.h"
-#include "Loss.h"
-using namespace zxy;
+
 int main() {
 	vector <int> layer_neural_num = { 784, 200, 10 };
 	Net net;
@@ -8,13 +7,13 @@ int main() {
 	net.initNet(layer_neural_num);
 	net.initWeights();
 	net.initBiases();
-	net.activation_func = "relu";
-	net.learning_rate = 0.005;
+	net.activation_func = "sigmoid";
+	net.learning_rate = 0.03;
 	net.loss_type = "L2";
-	net.train_iter = 500;
+	net.train_iter = 2000;
 
 	Mat input, label, test_input, test_label;
-	//800¸öÑù±¾ÑµÁ·£¬200¸öÑù±¾²âÊÔ
+	//800ä¸ªæ ·æœ¬è®­ç»ƒï¼Œ200ä¸ªæ ·æœ¬æµ‹è¯•
 	int sample_num = 800;
 	net.loadData("C:\\Users\\xiaoyu\\Desktop\\zxy_neural_network\\data\\input_1000.xml", input, label, 0, sample_num);
 	net.loadData("C:\\Users\\xiaoyu\\Desktop\\zxy_neural_network\\data\\input_1000.xml", test_input, test_label, 800, 200);

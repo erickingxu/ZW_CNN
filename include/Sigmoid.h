@@ -5,7 +5,10 @@ using namespace std;
 using namespace cv;
 
 class Sigmoid {
+private:
+	Mat input;
 public:
-	Mat Activation(Mat input);
-	Mat DeActivation(Mat input);
+	Sigmoid(Mat in) :input(in) {}
+	Mat Activation();
+	Mat DeActivation();
 };

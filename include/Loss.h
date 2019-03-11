@@ -6,9 +6,12 @@ using namespace std;
 using namespace cv;
 
 class Loss {
+private:
+	Mat input_;
+	Mat label_;
 public:
-	Loss() {};
 	~Loss() {};
-	float L1(Mat input, Mat label, Mat &out_error);
-	float L2(Mat input, Mat label, Mat &out_error);
+	Loss(Mat in, Mat la) :input_(in), label_(la) {}
+	float L1(Mat &out_error);
+	float L2(Mat &out_error);
 };

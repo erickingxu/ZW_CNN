@@ -10,7 +10,7 @@
 //	return x;
 //}
 
-Mat Tanh::Activation(Mat input) {
+Mat Tanh::Activation() {
 	int row = input.rows;
 	int col = input.cols;
 	Mat pos_exp_x(row, col, CV_32FC1);
@@ -40,10 +40,10 @@ Mat Tanh::Activation(Mat input) {
 	return dest;
 }
 
-Mat Tanh::DeActivation(Mat input) {
+Mat Tanh::DeActivation() {
 	int row = input.rows;
 	int col = input.cols;
-	Mat tanhx = Tanh::Activation(input);
+	Mat tanhx = Tanh::Activation();
 	Mat tanhx2(row, col, CV_32FC1);
 	Mat dest(row, col, CV_32FC1);
 
