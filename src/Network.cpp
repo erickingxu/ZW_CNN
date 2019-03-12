@@ -60,7 +60,7 @@ void Net::initWeights() {
 	for (int i = 0; i < Size; i++) {
 		int row = weights[i].rows;
 		int col = weights[i].cols;
-		/*float *data = new float[row * col];
+		float *data = new float[row * col];
 		if (InitType == 0) {
 		data = random_uniform(row * col);
 		}
@@ -68,8 +68,7 @@ void Net::initWeights() {
 		data = random_gaussian(row * col);
 		}
 		Mat temp(row, col, CV_32FC1, data);
-		weights[i] = temp.clone();*/
-		randn(weights[i], 0, 0.1);
+		weights[i] = temp.clone();
 	}
 	cout << "============= Initialize zxy_neural_network Weights Done! ====================" << endl;
 }
@@ -77,7 +76,7 @@ void Net::initWeights() {
 void Net::initBiases() {
 	int Size = biases.size();
 	for (int i = 0; i < Size; i++) {
-		/*int row = biases[i].rows;
+		int row = biases[i].rows;
 		int col = biases[i].cols;
 		float *data = new float[row * col];
 		if (InitType == 0) {
@@ -87,14 +86,7 @@ void Net::initBiases() {
 		data = random_gaussian(row * col);
 		}
 		Mat temp(row, col, CV_32FC1, data);
-		biases[i] = temp.clone();*/
-		int row = biases[i].rows;
-		int col = biases[i].cols;
-		for (int j = 0; j < row; j++) {
-			for (int k = 0; k < col; k++) {
-				biases[i].at<float>(j, k) = 0.5;
-			}
-		}
+		biases[i] = temp.clone();
 	}
 	cout << "============= Initialize zxy_neural_network Biases Done! ====================" << endl;
 }
