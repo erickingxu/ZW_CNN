@@ -8,7 +8,7 @@
 - src 实现神经网络的源码。
 - data 保存了Mnist数据集的xml文件，通过tools下的工具从csv文件转换过来。
 - tools 实现了csv文件和xml文件转换，训练，测试工具。
-- examples 训练MNIST手写数据集的例子。
+- examples 训练Mnist数据集的例子。
 - benchmark 一些测试结果记录。
 # 训练
 
@@ -34,9 +34,7 @@
 - 2019.3.9 开始实现神经网络的测试部分。Done!
 - 2019.3.9 开始实现神经网络的模型保存和测试部分。Done!
 - 2019.3.10 开始实现xml和csv转换工具。Done!
-
 - 2019.3.10 开始实现对MInst手写数距的训练。Done!
-
 - 2019.3.11 开始修复一个调用类的Public函数的BUG。Done!
 
 # QQ群
