@@ -8,7 +8,7 @@ class Relu {
 private:
 	Mat input;
 public:
-	Relu(Mat in) :input(in){}
+	Relu(Mat in) :input(in) {}
 	Mat Activation();
 	Mat DeActivation();
 };

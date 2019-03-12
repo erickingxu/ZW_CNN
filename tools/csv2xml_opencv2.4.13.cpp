@@ -31,7 +31,7 @@ int main() {
 
 	for (int i = 0; i < label.rows; i++) {
 		float index = label.at<float>(i, 0);
-		label2.at<float>(index, i) = index;
+		label2.at<float>(index, i) = 1.0;
 	}
 
 	string filename = "input.xml";

@@ -22,9 +22,9 @@ float Loss::L1(Mat &out_error) {
 	for (int i = 0; i < row; i++) {
 		for (int j = 0; j < col; j++) {
 #pragma omp critical
-			{
-				sum += error.at<float>(i, j);
-			}
+		{
+			sum += error.at<float>(i, j);
+		}
 		}
 	}
 
@@ -41,7 +41,7 @@ float Loss::L2(Mat &out_error) {
 	int row = input_.rows;
 	int col = input_.cols;
 	Mat error(row, col, CV_32FC1);
-//#pragma omp parallel for num_threads(openmp_num_threads)
+	//#pragma omp parallel for num_threads(openmp_num_threads)
 	for (int i = 0; i < row; i++) {
 		for (int j = 0; j < col; j++) {
 			error.at<float>(i, j) = (label_.at<float>(i, j) - input_.at<float>(i, j));
@@ -50,16 +50,15 @@ float Loss::L2(Mat &out_error) {
 	}
 	out_error = error.clone();
 	float sum = 0;
-//#pragma omp parallel for num_threads(openmp_num_threads)
+	//#pragma omp parallel for num_threads(openmp_num_threads)
 	for (int i = 0; i < row; i++) {
 		for (int j = 0; j < col; j++) {
-//#pragma omp critical
-//			{
-				sum += error.at<float>(i, j) * error.at<float>(i, j);
-//			}
+			//#pragma omp critical
+			//			{
+			sum += error.at<float>(i, j) * error.at<float>(i, j);
+			//			}
 		}
 	}
-
 	sum /= (row * col);
 
 	return sum;
