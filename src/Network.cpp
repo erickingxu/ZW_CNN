@@ -62,10 +62,10 @@ void Net::initWeights() {
 		int col = weights[i].cols;
 		float *data = new float[row * col];
 		if (InitType == 0) {
-		data = random_uniform(row * col);
+			data = random_uniform(row * col);
 		}
 		else if (InitType == 1) {
-		data = random_gaussian(row * col);
+			data = random_gaussian(row * col);
 		}
 		Mat temp(row, col, CV_32FC1, data);
 		weights[i] = temp.clone();
@@ -80,10 +80,10 @@ void Net::initBiases() {
 		int col = biases[i].cols;
 		float *data = new float[row * col];
 		if (InitType == 0) {
-		data = random_uniform(row * col);
+			data = random_uniform(row * col);
 		}
 		else if (InitType == 1) {
-		data = random_gaussian(row * col);
+			data = random_gaussian(row * col);
 		}
 		Mat temp(row, col, CV_32FC1, data);
 		biases[i] = temp.clone();
@@ -205,23 +205,14 @@ void Net::Train(Mat input, Mat label_) {
 			for (int j = 0; j < col; j++) {
 				label = label_.col(j);
 				layer[0] = input.col(j);
-
-				/*for (int jj = 0; jj < layer[0].rows; jj++) {
-				for (int kk = 0; kk < layer[0].cols; kk++) {
-				printf("%.5f ", layer[0].at<float>(jj, kk));
-				}
-				printf("\n");
-				}*/
-
 				forward();
-
 				batch_loss += loss;
 				backward();
 			}
-			//if (i % 1 == 0 || i == train_iter) {
-			cout << "Train " << i << " times" << endl;
-			cout << "Loss: " << batch_loss << endl;
-			//}
+			if (i % 1 == 0 || i == train_iter) {
+				cout << "Train " << i << " times" << endl;
+				cout << "Loss: " << batch_loss << endl;
+			}
 			final_loss = batch_loss;
 		}
 		final_loss /= train_iter;
@@ -266,6 +257,7 @@ void Net::Test(Mat input, Mat label_) {
 		int num = 0;
 		for (int i = 0; i < col; i++) {
 			layer[0] = input.col(i);
+			label = label_.col(i);
 			int predict_index = Predict1(layer[0]);
 			sum_loss += loss;
 			Mat label__ = label_.col(i);
