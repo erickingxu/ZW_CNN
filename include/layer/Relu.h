@@ -4,11 +4,11 @@
 using namespace std;
 using namespace cv;
 
-class Sigmoid {
+class Relu {
 private:
 	Mat input;
 public:
-	Sigmoid(Mat in) :input(in) {}
+	Relu(Mat in) :input(in) {}
 	Mat Activation();
 	Mat DeActivation();
 };
