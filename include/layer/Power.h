@@ -7,9 +7,12 @@ using namespace cv;
 class Power {
 private:
 	Mat input;
-
+	float shift;
+	float scale;
+	float power;
 public:
-	Power(Mat in) : input(in) {}
-	Mat Activation(float shift=0, float scale=1.0, float power=1.0);
-	Mat DeActivation(float shift = 0, float scale = 1.0, float power = 1.0);
+	~Power() {};
+	Power(Mat in, float sht=0, float scl=1.0, float pow=1.0) : input(in), shift(sht), scale(scl), power(pow){}
+	Mat Activation();
+	Mat DeActivation();
 };
