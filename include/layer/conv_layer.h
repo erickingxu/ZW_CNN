@@ -24,14 +24,13 @@ private:
 	int kernel_stride_height = 1;
 	int kernel_stride_width = 1;
 	bool padding = true;
-	vector <Mat> input;
-	vector <Mat> kernel;
+	vector <vector <Mat> >input;
+	vector <vector <Mat> >kernel;
 public:
-	Convolution(vector <Mat> input_, vector <Mat> kernel_, int n_in_channel_, int n_out_channel_, int kernel_height_, int kernel_width_, int kernel_stride_height_, int kernel_stride_width_, 
+	Convolution(vector <vector <Mat> >input_, vector <vector <Mat> >kernel_, int n_in_channel_, int n_out_channel_, int kernel_height_, int kernel_width_, int kernel_stride_height_, int kernel_stride_width_,
 		bool padding_):input(input_), kernel(kernel_), n_in_channel(n_in_channel_), n_out_channel(n_out_channel_), kernel_height(kernel_height_), kernel_width(kernel_width), 
 		kernel_stride_height(kernel_stride_height_), kernel_stride_width(kernel_stride_width_), padding(padding_){}
-	Convolution(vector <Mat> input_, vector <Mat> kernel_, int n_in_channel_, int n_out_channel_, int kernel_height_, int kernel_width_) :input(input_), kernel(kernel_), n_in_channel(n_in_channel_),
+	Convolution(vector <vector <Mat> >input_, vector <vector <Mat> >kernel_, int n_in_channel_, int n_out_channel_, int kernel_height_, int kernel_width_) :input(input_), kernel(kernel_), n_in_channel(n_in_channel_),
 		n_out_channel(n_out_channel_), kernel_height(kernel_height_), kernel_width(kernel_width){}
-	vector<Mat> Activation();
-	vector<Mat> DeActivation();
+	vector<vector<Mat> > Activation();
 };

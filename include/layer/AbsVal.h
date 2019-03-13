@@ -10,5 +10,4 @@ private:
 public:
 	AbsVal(Mat in) :input(in) {}
 	Mat Activation();
-	Mat DeActivation();
 };

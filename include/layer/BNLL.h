@@ -10,5 +10,4 @@ private:
 public:
 	BNLL(Mat in) :input(in) {}
 	Mat Activation();
-	Mat DeActivation();
 };
