@@ -16,4 +16,5 @@ public:
 	Padding(Mat input_, int kernel_height_, int kernel_width_) :input(input_), kernel_height(kernel_height_),
 		kernel_width(kernel_width_) {}
 	Mat Pad();
+	
 };
