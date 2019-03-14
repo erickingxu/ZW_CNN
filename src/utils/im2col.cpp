@@ -21,8 +21,8 @@ Mat IM2COL::ZW_IM2COL() {
 		int index = 0;
 		int new_row = (row - kernel_height) * (col - kernel_width);
 		Mat new_input(new_row, kernel_height * kernel_width, CV_32FC1);
-		for (int i = st_x; i < en_x; i += kernel_height_stride) {
-			for (int j = en_x; j < en_y; j += kernel_width_stride) {
+		for (int i = st_x; i < en_x; i++) {
+			for (int j = en_x; j < en_y; j++) {
 				for (int x = 0; x < kernel_height; x++) {
 					for (int y = 0; y < kernel_width; y++) {
 						int oldi = i - st_x + x;
@@ -33,7 +33,13 @@ Mat IM2COL::ZW_IM2COL() {
 				index++;
 			}
 		}
-		Mat output = new_kernel * new_input;
+		Mat ret = new_kernel * new_input;
+		Mat output(row, col, CV_32FC1);
+		for (int i = 0; i < (row - kernel_height); i++) {
+			for (int j = 0; j < (col - kernel_width); j++) {
+				output.at<float>(i, j) = ret.at<float>(0, i * col + j);
+			}
+		}
 		return output;
 	}
 	else if (padding_type == "SAME") {
@@ -46,8 +52,8 @@ Mat IM2COL::ZW_IM2COL() {
 		Mat new_input(new_row, kernel_height * kernel_width, CV_32FC1);
 		for (int i = st_x; i < en_x; i++) {
 			for (int j = en_x; j < en_y; j++) {
-				for (int x = 0; x < kernel_height; i += kernel_height_stride) {
-					for (int y = 0; y < kernel_width; y += kernel_width_stride) {
+				for (int x = 0; x < kernel_height; x++) {
+					for (int y = 0; y < kernel_width; y++) {
 						int oldi = i - (kernel_height - 1) / 2 + x;
 						int oldj = j - (kernel_width - 1) / 2 + y;
 						if (oldi < 0 || oldj < 0 || oldi >= row || oldj >= col) {
@@ -61,7 +67,13 @@ Mat IM2COL::ZW_IM2COL() {
 				index++;
 			}
 		}
-		Mat output = new_kernel * new_input;
+		Mat ret = new_kernel * new_input;
+		Mat output(row , col, CV_32FC1);
+		for (int i = 0; i < row; i++) {
+			for (int j = 0; j < col; j++) {
+				output.at<float>(i, j) = ret.at<float>(0, i * col + j);
+			}
+		}
 		return output;
 	}
 }
