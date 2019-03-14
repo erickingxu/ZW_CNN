@@ -6,9 +6,8 @@ using namespace cv;
 
 class Relu {
 private:
-	Mat input;
+	vector<Mat> input;
 public:
-	Relu(Mat in) :input(in) {}
-	Mat Activation();
-	Mat DeActivation();
+	Relu(vector<Mat> input_) :input(input_) {}
+	vector <Mat> forward();
 };
