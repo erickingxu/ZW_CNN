@@ -1,6 +1,6 @@
-#include "im2col.h"
+#include "im2col_stride_1x1.h"
 
-Mat IM2COL::ZW_IM2COL() {
+Mat IM2COL_1x1::ZW_IM2COL() {
 	int row = input.rows;
 	int col = input.cols;
 	int kernel_height = kernel.rows;
