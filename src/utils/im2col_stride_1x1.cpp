@@ -34,10 +34,10 @@ Mat IM2COL_1x1::ZW_IM2COL() {
 			}
 		}
 		Mat ret = new_kernel * new_input;
-		Mat output(row, col, CV_32FC1);
+		Mat output(row - kernel_height, col - kernel_width, CV_32FC1);
 		for (int i = 0; i < (row - kernel_height); i++) {
 			for (int j = 0; j < (col - kernel_width); j++) {
-				output.at<float>(i, j) = ret.at<float>(0, i * col + j);
+				output.at<float>(i, j) = ret.at<float>(0, i * (col - kernel_width) + j);
 			}
 		}
 		return output;
