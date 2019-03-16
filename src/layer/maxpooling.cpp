@@ -1,5 +1,6 @@
 #include "maxpooling.h"
 
+
 vector<Mat> MaxPooling::Pool() {
 	if (kernel_height_stride != kernel_width_stride) {
 		fprintf(stderr, "Pooling Stride Don't Match!");
