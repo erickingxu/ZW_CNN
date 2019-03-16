@@ -8,6 +8,6 @@ class Relu {
 private:
 	vector<Mat> input;
 public:
-	Relu(vector<Mat> input_) :input(input_) {}
-	vector <Mat> forward();
+	Relu(vector<Mat> input_) :input(input_){}
+	vector <Mat> Activation();
 };

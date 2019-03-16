@@ -6,9 +6,8 @@ using namespace cv;
 
 class Sigmoid {
 private:
-	Mat input;
+	vector <Mat> input;
 public:
-	Sigmoid(Mat in) :input(in) {}
-	Mat Activation();
-	Mat DeActivation();
+	Sigmoid(vector <Mat> input_) :input(input_) {}
+	vector <Mat> Activation();
 };
