@@ -6,9 +6,8 @@ using namespace cv;
 
 class Tanh {
 private:
-	Mat input;
+	vector <Mat> input;
 public:
-	Tanh(Mat in) :input(in) {}
-	Mat Activation();
-	Mat DeActivation();
+	Tanh(vector <Mat> input_) :input(input_) {}
+	vector <Mat> Activation();
 };
