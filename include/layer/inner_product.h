@@ -6,9 +6,9 @@ using namespace cv;
 
 class Inner_Product {
 private:
-	vector <Mat> input;
-	vector <Mat> weights;
+	Mat input;
+	Mat weights;
 public:
-	Inner_Product(vector <Mat> input_, vector <Mat> weights_):inputs(input_), weights(weights_){}
-	vector <Mat> Activation();
+	Inner_Product(Mat input_, Mat weights_):input(input_), weights(weights_){}
+	Mat Activation();
 };
