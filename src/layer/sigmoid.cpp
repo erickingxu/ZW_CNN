@@ -1,4 +1,4 @@
-#include "Sigmoid.h"
+#include "sigmoid.h"
 #include "config.h"
 
 //e^x
