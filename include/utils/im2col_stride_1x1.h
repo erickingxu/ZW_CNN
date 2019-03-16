@@ -4,7 +4,7 @@
 using namespace std;
 using namespace cv;
 
-class IM2COL {
+class IM2COL_1x1 {
 private:
 	Mat input;
 	Mat kernel;
@@ -12,7 +12,7 @@ private:
 	int kernel_width_stride;
 	string padding_type = "VALID";
 public:
-	IM2COL(Mat input_, Mat kernel_, int kernel_height_stride_, int kernel_width_stride_, string padding_type_):input(input_), kernel(kernel_), 
+	IM2COL_1x1(Mat input_, Mat kernel_, int kernel_height_stride_, int kernel_width_stride_, string padding_type_):input(input_), kernel(kernel_), 
 	kernel_height_stride(kernel_height_stride_), kernel_width_stride(kernel_width_stride_), padding_type(padding_type_){}
 	Mat ZW_IM2COL();
 };
