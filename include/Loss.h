@@ -10,7 +10,6 @@ private:
 	Mat input_;
 	Mat label_;
 public:
-	~Loss() {};
 	Loss(Mat in, Mat la) :input_(in), label_(la) {}
 	float L1(Mat &out_error);
 	float L2(Mat &out_error);
