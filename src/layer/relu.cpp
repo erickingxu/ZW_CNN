@@ -1,4 +1,4 @@
-#include "Relu.h"
+#include "relu.h"
 #include "config.h"
 
 vector <Mat> Relu::Activation() {
