@@ -6,12 +6,12 @@ using namespace cv;
 
 class Power {
 private:
-	Mat input;
+	vector <Mat> input;
 	float shift;
 	float scale;
 	float power;
 public:
-	~Power() {};
-	Power(Mat in, float sht=0, float scl=1.0, float pow=1.0) : input(in), shift(sht), scale(scl), power(pow){}
-	Mat Activation();
+	Power(vector <Mat> input_, float shift_ = 0, float scale_ = 1.0, float power_ = 1.0) : 
+		input(input_), shift(shift_), scale(scale_), power(power_) {}
+	vector <Mat> Activation();
 };

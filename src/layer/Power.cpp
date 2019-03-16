@@ -1,19 +1,19 @@
-#include "Power.h"
-#include "config.h"
+#include "power.h"
 
-
-
-Mat Power::Activation(){
-		int row = input.rows;
-		int col = input.cols;
+vector <Mat> Power::Activation() {
+	int Size = input.size();
+	int row = input[0].rows;
+	int col = input[1].cols;
+	vector <Mat> output;
+	output.resize(Size);
+	for (int i = 0; i < Size; i++) {
 		Mat dest(row, col, CV_32FC1);
-		for (int i = 0; i < row; i++) {
-			for (int j = 0; j < col; j++) {
-				dest.at<float>(i, j) = pow(shift + scale * input.at<float>(i, j), power);
+		for (int j = 0; j < row; j++) {
+			for (int k = 0; k < col; k++) {
+				dest.at<float>(j, k) = pow(shift + scale * input[i].at<float>(j, k), power);;
 			}
 		}
-
-		return dest;
-
+		output[i] = dest;
 	}
-	
+	return output;
+}
