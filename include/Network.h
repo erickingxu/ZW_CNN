@@ -8,80 +8,81 @@ using namespace cv;
 class Net
 {
 public:
-	//Ã¿Ò»²ãµÄÉñ¾­ÔªÊıÄ¿
+	//æ¯ä¸€å±‚çš„ç¥ç»å…ƒæ•°ç›®
 	vector <int> layer_neuron_num;
-	//³õÊ¼»¯²ßÂÔ
-	//0±íÊ¾[-1£¬1]Ëæ»ú³õÊ¼»¯
-	//1±íÊ¾¾ùÖµÎªGaussMean·½²îÎªGaussSigmaµÄ¸ßË¹³õÊ¼»¯
+	//åˆå§‹åŒ–ç­–ç•¥
+	//0è¡¨ç¤º[-1ï¼Œ1]éšæœºåˆå§‹åŒ–
+	//1è¡¨ç¤ºå‡å€¼ä¸ºGaussMeanæ–¹å·®ä¸ºGaussSigmaçš„é«˜æ–¯åˆå§‹åŒ–
 	int InitType = 0;
-	//¸ßË¹³õÊ¼»¯µÄ·½²îÄ¬ÈÏÎª1.0
+	//é«˜æ–¯åˆå§‹åŒ–çš„æ–¹å·®é»˜è®¤ä¸º1.0
 	float GaussSigma = 1.0;
-	//¸ßË¹³õÊ¼»¯µÄ¾ùÖµÄ¬ÈÏÎª0
+	//é«˜æ–¯åˆå§‹åŒ–çš„å‡å€¼é»˜è®¤ä¸º0
 	float GaussMean = 0;
-	//openmpÏß³ÌÊı, Ä¬ÈÏÎª1
-	//¼¤»îº¯ÊıÀàĞÍ
+	//openmpçº¿ç¨‹æ•°, é»˜è®¤ä¸º1
+	//æ¿€æ´»å‡½æ•°ç±»å‹
 	string activation_func = "sigmoid";
-	//ËğÊ§º¯ÊıÀàĞÍ
+	//æŸå¤±å‡½æ•°ç±»å‹
 	string loss_type = "L1";
-	//·´Ïò´«²¥º¯Êı
+	//åå‘ä¼ æ’­å‡½æ•°
 	void backward();
-	//Ñ§Ï°ÂÊ
+	//å­¦ä¹ ç‡
 	float learning_rate = 0.001;
-	//ÑµÁ·µÄµü´ú´ÎÊı
+	//è®­ç»ƒçš„è¿­ä»£æ¬¡æ•°
 	int train_iter = 0;
-	//²âÊÔµü´úµÄ´ÎÊı
+	//æµ‹è¯•è¿­ä»£çš„æ¬¡æ•°
 	int test_iter = 0;
-	//batchµÄ´óĞ¡
+	//batchçš„å¤§å°
 	int batch_size = 1;
 	//accuracy
 	float accuracy = 0.0;
 protected:
-	//²ã£¬Ê¹ÓÃOpencvµÄMat
+	//å±‚ï¼Œä½¿ç”¨Opencvçš„Mat
 	vector <Mat> layer;
-	//È¨Öµ¾ØÕó
+	//æƒå€¼çŸ©é˜µ
 	vector <Mat> weights;
-	//Æ«ÖÃ¾ØÕó
+	//åç½®çŸ©é˜µ
 	vector <Mat> biases;
-	//ËğÊ§º¯Êı¶ÔËùÓĞ²ÎÊıµÄÌİ¶È
+	//æŸå¤±å‡½æ•°å¯¹æ‰€æœ‰å‚æ•°çš„æ¢¯åº¦
 	vector <Mat> delta;
-	//Ç°Ïò´«²¥µÄ×îºóÒ»²ãµÄÊä³ö£¬·´Ïò´«²¥µÄÆğµã
+	//å‰å‘ä¼ æ’­çš„æœ€åä¸€å±‚çš„è¾“å‡ºï¼Œåå‘ä¼ æ’­çš„èµ·ç‚¹
 	Mat output_error;
-	//¶¨Òå±êÇ©Mat
+	//å®šä¹‰æ ‡ç­¾Mat
 	Mat label;
-	//¶¨ÒåËğÊ§º¯ÊıµÄÖµ
+	//å®šä¹‰æŸå¤±å‡½æ•°çš„å€¼
 	float loss = 0;
+	
 public:
 	Net() {};
 	~Net() {};
-	//³õÊ¼»¯ÍøÂç
+	//åˆå§‹åŒ–ç½‘ç»œ
 	void initNet(vector <int> layer_neuron_num_);
-	//²úÉúÆÕÍ¨µÄËæ»úÊı
+	//äº§ç”Ÿæ™®é€šçš„éšæœºæ•°
 	float *random_uniform(int length);
-	//²úÉú¸ßË¹·Ö²¼Ëæ»úÊı
+	//äº§ç”Ÿé«˜æ–¯åˆ†å¸ƒéšæœºæ•°
 	float *random_gaussian(int length);
-	//³õÊ¼»¯È¨ÖØ
+	//åˆå§‹åŒ–æƒé‡
 	void initWeights();
-	//³õÊ¼»¯Æ«ÖÃ
+	//åˆå§‹åŒ–åç½®
 	void initBiases();
-	//³õÊ¼»¯Ã¿²ãLayer¼¤»îº¯ÊıÀàĞÍ
+	//åˆå§‹åŒ–æ¯å±‚Layeræ¿€æ´»å‡½æ•°ç±»å‹
 	void SetActivation(string input);
-	//Ç°Ïò´«²¥
+	//å‰å‘ä¼ æ’­
 	void forward();
-	//ÊµÏÖTarin
+	//å®ç°Tarin
 	void Train(Mat input, Mat label_);
-	//ÊµÏÖTest
+	//å®ç°Test
 	void Test(Mat input, Mat label_);
-	//ÊµÏÖbatchÎª1µÄpredictºÍargmax
+	//å®ç°batchä¸º1çš„predictå’Œargmax
 	int Predict1(Mat input);
-	//±£´æÑµÁ·µÄÄ£ĞÍ
+	//ä¿å­˜è®­ç»ƒçš„æ¨¡å‹
 	void save_model(string file_name);
-	//¼ÓÔØÄ£ĞÍ
+	//åŠ è½½æ¨¡å‹
 	void load_model(string file_name);
-	//¼ÓÔØÊı¾İ
+	//åŠ è½½æ•°æ®
 	void loadData(string filename, Mat &INPUT, Mat &LABEL, int st, int sample_num);
 protected:
-	//·´Ïò´«²¥ÇóÌİ¶È£¨Á´Ê½·¨Ôò£©
+	//åå‘ä¼ æ’­æ±‚æ¢¯åº¦ï¼ˆé“¾å¼æ³•åˆ™ï¼‰
 	void getGrad();
-	//¸ù¾İÈ¥ÇóÈ¡µÄÌİ¶ÈºÍÑ§Ï°ÂÊ²ÎÊı¸üĞÂ
+	//æ ¹æ®å»æ±‚å–çš„æ¢¯åº¦å’Œå­¦ä¹ ç‡å‚æ•°æ›´æ–°
 	void UpdateParameters();
 };
