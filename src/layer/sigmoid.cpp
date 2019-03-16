@@ -1,15 +1,6 @@
 #include "sigmoid.h"
 #include "config.h"
 
-//e^x
-//inline float exp2(float x) {
-//	x = 1.0 + x / 1024;
-//	x *= x; x *= x; x *= x; x *= x;
-//	x *= x; x *= x; x *= x; x *= x;
-//	x *= x; x *= x;
-//	return x;
-//}
-
 vector <Mat> Sigmoid::Activation() {
 	int Size = input.size();
 	int row = input[0].rows;
