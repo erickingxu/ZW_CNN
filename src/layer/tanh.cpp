@@ -1,4 +1,4 @@
-#include "Tanh.h"
+#include "tanh.h"
 #include "config.h"
 
 //e^x
