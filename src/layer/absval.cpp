@@ -3,7 +3,7 @@
 vector <Mat> AbsVal::Activation() {
 	int Size = input.size();
 	int row = input[0].rows;
-	int col = input[1].cols;
+	int col = input[0].cols;
 	vector <Mat> output;
 	output.resize(Size);
 	for (int i = 0; i < Size; i++) {
