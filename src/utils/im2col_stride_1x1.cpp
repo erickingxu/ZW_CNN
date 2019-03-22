@@ -43,10 +43,10 @@ Mat IM2COL_1x1::ZW_IM2COL() {
 		return output;
 	}
 	else if (padding_type == "SAME") {
-		int st_x = 0;
-		int en_x = row;
-		int st_y = 0;
-		int en_y = col;
+		int st_x = (kernel_height - 1) / 2;
+		int en_x = row + (kernel_height - 1) / 2;
+		int st_y = (kernel_width - 1) / 2;
+		int en_y = col + (kernel_width - 1) / 2;
 		int index = 0;
 		int new_row = row * col;
 		Mat new_input(new_row, kernel_height * kernel_width, CV_32FC1);
@@ -56,12 +56,7 @@ Mat IM2COL_1x1::ZW_IM2COL() {
 					for (int y = 0; y < kernel_width; y++) {
 						int oldi = i - (kernel_height - 1) / 2 + x;
 						int oldj = j - (kernel_width - 1) / 2 + y;
-						if (oldi < 0 || oldj < 0 || oldi >= row || oldj >= col) {
-							new_input.at<float>(index, x * kernel_width + y) = 0;
-						}
-						else {
-							new_input.at<float>(index, x * kernel_width + y) = input.at<float>(oldi, oldj);
-						}
+						new_input.at<float>(index, x * kernel_width + y) = input.at<float>(oldi, oldj);
 					}
 				}
 				index++;
