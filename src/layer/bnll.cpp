@@ -3,7 +3,7 @@
 vector <Mat> BNLL::Activation() {
 	int Size = input.size();
 	int row = input[0].rows;
-	int col = input[0].cols;
+	int col = input[1].cols;
 	vector <Mat> output;
 	output.resize(Size);
 	for (int i = 0; i < Size; i++) {
@@ -16,7 +16,7 @@ vector <Mat> BNLL::Activation() {
 		}
 		for (int j = 0; j < row; j++) {
 			for (int k = 0; k < col; k++) {
-				dest.at<float>(j, k) = log(1.0 + exp_x[i].at<float>(j, k));
+				dest.at<float>(j, k) = log(1.0 + exp_x.at<float>(j, k));
 			}
 		}
 		output[i] = dest;
