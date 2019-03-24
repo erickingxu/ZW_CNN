@@ -8,7 +8,7 @@ using namespace cv;
 namespace zwcnn {
 	class Blob {
 	public:
-		Blob() {}
+		Blob();
 		string name;
 		//生产这个blob的层的index
 		int producer;
