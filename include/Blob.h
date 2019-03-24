@@ -5,12 +5,14 @@
 using namespace std;
 using namespace cv;
 
-class Blob {
-public:
-	Blob(){}
-	string name;
-	//生产这个blob的层的index
-	int producer;
-	//需要这个blob作为输入的层index
-	vector <int> consumers;
-};
+namespace zwcnn {
+	class Blob {
+	public:
+		Blob() {}
+		string name;
+		//生产这个blob的层的index
+		int producer;
+		//需要这个blob作为输入的层index
+		vector <int> consumers;
+	};
+}

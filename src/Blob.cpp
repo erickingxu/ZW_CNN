@@ -1,5 +1,7 @@
 #include "Blob.h"
 
-Blob::Blob() {
-	producer = -1;
+namespace zwcnn {
+	Blob::Blob() {
+		producer = -1;
+	}
 }
